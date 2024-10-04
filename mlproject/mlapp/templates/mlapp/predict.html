@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Churn Prediction</title>
+    <!-- ลิงก์ไปยัง Bootstrap 4.0.0 CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Customer Churn Prediction</h1>
+    
+    <!-- ฟอร์มสำหรับการพยากรณ์ -->
+    <form method="post" action="/predict/" id="predictionForm" class="form-group">
+        {% csrf_token %}
+        <!-- Django form fields rendered with Bootstrap styles -->
+        <div class="form-group">
+            <label for="id_age">Age</label>
+            {{ form.age }}
+        </div>
+        <div class="form-group">
+            <label for="id_gender">Gender</label>
+            {{ form.gender }}
+        </div>
+        <div class="form-group">
+            <label for="id_tenure">Tenure</label>
+            {{ form.tenure }}
+        </div>
+        <div class="form-group">
+            <label for="id_usage_frequency">Usage Frequency</label>
+            {{ form.usage_frequency }}
+        </div>
+        <div class="form-group">
+            <label for="id_support_calls">Support Calls</label>
+            {{ form.support_calls }}
+        </div>
+        <div class="form-group">
+            <label for="id_payment_delay">Payment Delay</label>
+            {{ form.payment_delay }}
+        </div>
+        <div class="form-group">
+            <label for="id_subscription_type">Subscription Type</label>
+            {{ form.subscription_type }}
+        </div>
+        <div class="form-group">
+            <label for="id_contract_length">Contract Length</label>
+            {{ form.contract_length }}
+        </div>
+        <div class="form-group">
+            <label for="id_total_spend">Total Spend</label>
+            {{ form.total_spend }}
+        </div>
+        <div class="form-group">
+            <label for="id_last_interaction">Last Interaction</label>
+            {{ form.last_interaction }}
+        </div>
+
+        <!-- ปุ่ม Predict และ Clear -->
+        <button type="submit" class="btn btn-primary">Predict</button>
+        <button type="button" onclick="clearForm()" class="btn btn-secondary">Clear</button>
+    </form>
+
+    <!-- แสดงผลการพยากรณ์ -->
+    {% if prediction is not None %}
+        <h2 class="mt-4">ผลการพยากรณ์: {{ prediction }}</h2>
+    {% endif %}
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+    
+<script>
+    function clearForm() {
+        document.querySelectorAll("#predictionForm input").forEach(input => {
+            input.value = "";  // ลบข้อมูลในช่องกรอกทุกช่อง
+        });
+    }
+</script>
+</body>
+</html>
