@@ -6,10 +6,12 @@ class PredictionForm(forms.Form):
         widget=forms.NumberInput(attrs={'class': 'form-control'})
     )
     gender = forms.ChoiceField(
-        label='Gender',
-        choices=[(0, 'ชาย'), (1, 'หญิง')],  # บังคับให้ผู้ใช้เลือก ชาย (0) หรือ หญิง (1)
-        widget=forms.Select(attrs={'class': 'form-control'})
-    )
+       label='Gender',
+       choices=[('', 'เลือกเพศ'), (0, 'ชาย'), (1, 'หญิง')],  # เพิ่มตัวเลือกที่ไม่มีค่าเริ่มต้น
+       widget=forms.Select(attrs={'class': 'form-control'}),
+       required=True  # บังคับให้เลือก
+)
+
     tenure = forms.FloatField(
         label='Tenure',
         widget=forms.NumberInput(attrs={'class': 'form-control'})
@@ -28,14 +30,17 @@ class PredictionForm(forms.Form):
     )
     subscription_type = forms.ChoiceField(
         label='Subscription Type',
-        choices=[(0, 'Basic'), (1, 'Standard'), (2, 'Premium')],  # บังคับให้เลือก Subscription Type
-        widget=forms.Select(attrs={'class': 'form-control'})
+        choices=[('', 'ประเภทสมาชิก'), (0, 'Basic'), (1, 'Standard'), (2, 'Premium')],  # เพิ่มตัวเลือกที่ไม่มีค่าเริ่มต้น
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        required=True  # บังคับให้เลือก
     )
     contract_length = forms.ChoiceField(
         label='Contract Length',
-        choices=[(0, 'Monthly'), (1, 'Quarterly'), (2, 'Annual')],  # บังคับให้เลือก Contract Length
-        widget=forms.Select(attrs={'class': 'form-control'})
+        choices=[('', 'ระยะเวลาของสัญญา'), (0, 'Monthly'), (1, 'Quarterly'), (2, 'Annual')],
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        required=True
     )
+
     total_spend = forms.FloatField(
         label='Total Spend',
         widget=forms.NumberInput(attrs={'class': 'form-control'})

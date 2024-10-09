@@ -38,4 +38,4 @@ def predict(request):
     else:
         form = PredictionForm()
 
-    return render(request, 'mlapp/predict.html', {'form': form, 'prediction': result})
+    return render(request, 'mlapp/index.html', {'form': form, 'prediction': result})
